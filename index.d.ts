@@ -12,7 +12,7 @@ export type Server = FastifyInstance<
   RawRequestDefaultExpression<RawServerDefault>,
   RawReplyDefaultExpression<RawServerDefault>,
   FastifyBaseLogger,
-JsonSchemaToTsProvider
+  JsonSchemaToTsProvider
 >;
 
 export function Route(server: Server): Promise<void>;

@@ -6,6 +6,15 @@ const server = fastify();
 
 server.register(app);
 
+server.setErrorHandler((err, request, reply) => {
+  const { statusCode, message } = err;
+
+  reply.code(statusCode ?? 500).send({
+    statusCode,
+    message,
+  });
+});
+
 server.listen({ port: +PORT, host: HOST }, err => {
   if (err) {
     console.error(err);

@@ -3,6 +3,7 @@ import { authHook } from '../../hooks/auth.hook.js';
 import userRepository from '../../db/repositories/user.repository.js';
 import tokenService from '../../services/token.service.js';
 import { hash, compare } from '../../services/crypto.service.js';
+import apiError from '../../apiError.js';
 
 /** @type {import('../../index').Route} */
 export default async server => {
@@ -11,6 +12,14 @@ export default async server => {
   });
 
   server.post('/sign-up', { schema: signUp }, async (request, reply) => {
+    const candidate = await userRepository.findOne({
+      email: request.body.email,
+    });
+
+    if (candidate) {
+      throw apiError.badRequest('Email already taken.');
+    }
+
     const user = await userRepository.create({
       ...request.body,
       password: hash(request.body.password),
@@ -27,16 +36,20 @@ export default async server => {
 
     const candidate = await userRepository.findOne({ email });
 
-    const validPassword = compare(password, candidate.password);
-
-    if (validPassword) {
-      return {
-        accessToken: tokenService.generateAccess({ id: candidate.id }),
-        refreshToken: tokenService.generateRefresh({ id: candidate.id }),
-      };
+    if (!candidate) {
+      throw apiError.notFound('User not found.');
     }
 
-    return false;
+    const validPassword = compare(password, candidate.password);
+
+    if (!validPassword) {
+      throw apiError.badRequest('Wrong credentials.');
+    }
+
+    return {
+      accessToken: tokenService.generateAccess({ id: candidate.id }),
+      refreshToken: tokenService.generateRefresh({ id: candidate.id }),
+    };
   });
 
   server.get('/session', { preHandler: authHook }, async (request, reply) => {
