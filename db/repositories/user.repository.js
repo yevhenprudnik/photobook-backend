@@ -20,16 +20,27 @@ const findOne = async filter => {
 
 /**
  * @param {Partial<User>} definition
- * @returns {Promise<User>} ???
+ * @returns {Promise<number>}
  */
 const create = async definition => {
-  return db('user').insert(definition);
+  const users = await db('user').insert(definition).returning('id');
+
+  return users[0].id;
+};
+
+/**
+ * @param {Partial<User>} filter
+ * @returns {Promise<User>} ???
+ */
+const remove = async filter => {
+  return db('user').where(filter).del();
 };
 
 export default {
   find,
   findOne,
   create,
+  remove,
 };
 
 // export const update = async () => {};

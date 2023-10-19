@@ -1,5 +1,5 @@
 import { signUp, signIn } from './schemas.js';
-import { authHook } from '../../hooks/auth.hook.js';
+import { validateSession } from '../../hooks/auth.hook.js';
 import userRepository from '../../db/repositories/user.repository.js';
 import tokenService from '../../services/token.service.js';
 import { hash, compare } from '../../services/crypto.service.js';
@@ -7,9 +7,13 @@ import apiError from '../../apiError.js';
 
 /** @type {import('../../index').Route} */
 export default async server => {
-  server.get('/', { preHandler: authHook }, async (request, reply) => {
-    return Reflect.get(request, 'user');
-  });
+  server.get(
+    '/',
+    { preHandler: validateSession('access') },
+    async (request, reply) => {
+      return Reflect.get(request, 'user');
+    }
+  );
 
   server.post('/sign-up', { schema: signUp }, async (request, reply) => {
     const candidate = await userRepository.findOne({
@@ -20,14 +24,14 @@ export default async server => {
       throw apiError.badRequest('Email already taken.');
     }
 
-    const user = await userRepository.create({
+    const userId = await userRepository.create({
       ...request.body,
       password: hash(request.body.password),
     });
 
     return {
-      accessToken: tokenService.generateAccess({ id: user.id }),
-      refreshToken: tokenService.generateRefresh({ id: user.id }),
+      accessToken: tokenService.generateAccess({ id: userId }),
+      refreshToken: tokenService.generateRefresh({ id: userId }),
     };
   });
 
@@ -52,12 +56,16 @@ export default async server => {
     };
   });
 
-  server.get('/session', { preHandler: authHook }, async (request, reply) => {
-    const user = Reflect.get(request, 'user');
+  server.get(
+    '/session',
+    { preHandler: validateSession('refresh') },
+    async (request, reply) => {
+      const user = Reflect.get(request, 'user');
 
-    return {
-      accessToken: tokenService.generateAccess({ id: user.id }),
-      refreshToken: tokenService.generateRefresh({ id: user.id }),
-    };
-  });
+      return {
+        accessToken: tokenService.generateAccess({ id: user.id }),
+        refreshToken: tokenService.generateRefresh({ id: user.id }),
+      };
+    }
+  );
 };

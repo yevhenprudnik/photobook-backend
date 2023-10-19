@@ -28,7 +28,7 @@ const verifyAccess = token => {
  * @param {string} token
  */
 const verifyRefresh = token => {
-  return generate(token, JWT_REFRESH_SECRET);
+  return verify(token, JWT_REFRESH_SECRET);
 };
 
 /**
