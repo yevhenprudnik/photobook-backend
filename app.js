@@ -10,9 +10,9 @@ const __dirname = join(dirname(__filename));
  * @param {import('fastify').FastifyServerOptions} _options
  */
 export default async (server, _options) => {
-  // server.register(AutoLoad, {
-  //   dir: join(__dirname, 'plugins'),
-  // });
+  server.register(AutoLoad, {
+    dir: join(__dirname, 'plugins'),
+  });
 
   server.register(AutoLoad, {
     dir: join(__dirname, 'routes'),

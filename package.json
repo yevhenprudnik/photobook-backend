@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@fastify/autoload": "^5.7.1",
+    "@fastify/cors": "^8.4.0",
     "@fastify/type-provider-json-schema-to-ts": "^2.2.2",
     "@types/jsonwebtoken": "^9.0.4",
     "dotenv": "^16.3.1",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@types/knex": "^0.16.1",
     "@types/node": "^20.6.1",
+    "@types/pg": "^8.10.7",
     "typescript": "^5.2.2"
   }
 }
