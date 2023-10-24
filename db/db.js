@@ -1,9 +1,7 @@
 import knex from 'knex';
 import { DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER } from '../environment.js';
 
-console.log('Database connected.');
-
-export default knex({
+const db = knex({
   client: 'pg',
   connection: {
     host: DB_HOST,
@@ -13,3 +11,7 @@ export default knex({
     database: DB_NAME,
   },
 });
+
+console.log('Database connected.');
+
+export default db;
