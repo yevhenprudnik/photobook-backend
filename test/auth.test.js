@@ -15,20 +15,26 @@ describe('/auth test.', async () => {
   let refreshToken;
 
   after(async () => {
-    await request(
-      '/user',
-      'DELETE',
-      {},
-      {
+    const res = await request('/user', 'DELETE', {
+      headers: {
         authorization: `Bearer ${accessToken} ${refreshToken}`,
-      }
+      },
+    });
+
+    assert.strictEqual(res.status, 200);
+
+    const data = await res.json();
+
+    assert.deepStrictEqual(data, { affected: 1 });
+
+    console.log(
+      `Cleaned up testing environment: removed ${data.affected} test user.`
     );
   });
 
   test('Throw error if required fields are missing.', async t => {
     const res = await request('/auth/sign-up', 'POST', {
-      username: 'username',
-      password: 'password',
+      body: { username: 'username', password: 'password' },
     });
 
     assert.strictEqual(res.status, 400);
@@ -43,9 +49,11 @@ describe('/auth test.', async () => {
 
   test('Throw error if email is wrong format.', async t => {
     const res = await request('/auth/sign-up', 'POST', {
-      username: 'username',
-      email: 'invalid_email',
-      password: 'password',
+      body: {
+        username: 'username',
+        email: 'invalid_email',
+        password: 'password',
+      },
     });
 
     assert.strictEqual(res.status, 400);
@@ -56,7 +64,7 @@ describe('/auth test.', async () => {
   });
 
   test('Successfully sign up new user.', async t => {
-    const res = await request('/auth/sign-up', 'POST', user);
+    const res = await request('/auth/sign-up', 'POST', { body: user });
 
     assert.strictEqual(res.status, 200);
 
@@ -70,7 +78,7 @@ describe('/auth test.', async () => {
   });
 
   test('Successfully sign in new user.', async t => {
-    const res = await request('/auth/sign-in', 'POST', user);
+    const res = await request('/auth/sign-in', 'POST', { body: user });
 
     assert.strictEqual(res.status, 200);
 
@@ -82,8 +90,7 @@ describe('/auth test.', async () => {
 
   test('Throw error with wrong password.', async t => {
     const res = await request('/auth/sign-in', 'POST', {
-      ...user,
-      password: 'wrong_password',
+      body: { ...user, password: 'wrong_password' },
     });
 
     assert.strictEqual(res.status, 400);
@@ -106,8 +113,8 @@ describe('/auth test.', async () => {
   });
 
   test('Throw error with invalid auth headers.', async t => {
-    const res = await request('/auth', 'GET', null, {
-      authorization: 'Invalid auth headers.',
+    const res = await request('/auth', 'GET', {
+      headers: { authorization: 'Invalid auth headers.' },
     });
 
     assert.strictEqual(res.status, 400);
@@ -119,8 +126,8 @@ describe('/auth test.', async () => {
   });
 
   test('Successfully return user with valid tokens.', async t => {
-    const res = await request('/auth', 'GET', null, {
-      authorization: `Bearer ${accessToken} ${refreshToken}`,
+    const res = await request('/auth', 'GET', {
+      headers: { authorization: `Bearer ${accessToken} ${refreshToken}` },
     });
 
     assert.strictEqual(res.status, 200);
@@ -133,8 +140,8 @@ describe('/auth test.', async () => {
   });
 
   test('Successfully refresh user session.', async t => {
-    const res = await request('/auth/session', 'GET', null, {
-      authorization: `Bearer ${accessToken} ${refreshToken}`,
+    const res = await request('/auth/session', 'GET', {
+      headers: { authorization: `Bearer ${accessToken} ${refreshToken}` },
     });
 
     assert.strictEqual(res.status, 200);

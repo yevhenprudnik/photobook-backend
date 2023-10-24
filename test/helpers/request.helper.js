@@ -3,22 +3,17 @@ const baseUrl = 'http://localhost:8080';
 /**
  * @param {string} path
  * @param {string} method
- * @param {object | null} [body]
- * @param {object} headers
+ * @param {{body?: any, headers?: any}} args
  */
-export const request = (path, method, body, headers = {}) => {
-  /** @type {RequestInit} */
-  const requestInit = {
+export const request = async (path, method, args = {}) => {
+  const { headers, body } = args;
+
+  return fetch(baseUrl + path, {
     method,
     headers: {
       'content-type': 'application/json',
       ...headers,
     },
-  };
-
-  if (body) {
-    requestInit.body = JSON.stringify(body);
-  }
-
-  return fetch(baseUrl + path, requestInit);
+    body: JSON.stringify(body),
+  });
 };
