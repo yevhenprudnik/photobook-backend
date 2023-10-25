@@ -20,3 +20,21 @@ export const signIn = /** @type {const} */ ({
     required: ['email', 'password'],
   },
 });
+
+const authHeadersSchema = {
+  type: 'object',
+  properties: {
+    authorization: {
+      type: 'string',
+    },
+  },
+  required: ['authorization'],
+};
+
+export const getCurrentUser = /** @type {const} */ ({
+  headers: authHeadersSchema,
+});
+
+export const refreshSession = /** @type {const} */ ({
+  headers: authHeadersSchema,
+});

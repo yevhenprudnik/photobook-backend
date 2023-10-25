@@ -1,9 +1,10 @@
 import userRepository from '../db/repositories/user.repository.js';
 import apiError, { ApiError } from '../apiError.js';
 import tokenService from '../services/token.service.js';
+import { setUser } from '../services/user.cache.service.js';
 
 /** @param {'access'|'refresh'} tokenType */
-export const validateSession =
+export const validateByToken =
   tokenType =>
   /** @type {import('fastify').preHandlerHookHandler} */
   async (request, reply) => {
@@ -36,7 +37,7 @@ export const validateSession =
         throw apiError.notFound('User not found.');
       }
 
-      Reflect.set(request, 'user', user);
+      setUser(request, user);
     } catch (err) {
       if (err instanceof ApiError) {
         throw err;

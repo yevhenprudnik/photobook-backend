@@ -1,17 +1,18 @@
-import { signUp, signIn } from './schemas.js';
-import { validateSession } from '../../hooks/auth.hook.js';
+import { getCurrentUser, signUp, signIn, refreshSession } from './schemas.js';
+import { validateByToken } from '../../hooks/auth.hook.js';
 import userRepository from '../../db/repositories/user.repository.js';
 import tokenService from '../../services/token.service.js';
 import { hash, compare } from '../../services/crypto.service.js';
 import apiError from '../../apiError.js';
+import { getUser } from '../../services/user.cache.service.js';
 
 /** @type {import('../../index').Route} */
 export default async server => {
   server.get(
     '/',
-    { preHandler: validateSession('access') },
+    { schema: getCurrentUser, preHandler: validateByToken('access') },
     async (request, reply) => {
-      return Reflect.get(request, 'user');
+      return getUser(request);
     }
   );
 
@@ -58,9 +59,9 @@ export default async server => {
 
   server.get(
     '/session',
-    { preHandler: validateSession('refresh') },
+    { schema: refreshSession, preHandler: validateByToken('refresh') },
     async (request, reply) => {
-      const user = Reflect.get(request, 'user');
+      const user = getUser(request);
 
       return {
         accessToken: tokenService.generateAccess({ id: user.id }),

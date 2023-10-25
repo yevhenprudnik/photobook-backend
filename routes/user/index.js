@@ -1,5 +1,5 @@
 import userRepository from '../../db/repositories/user.repository.js';
-import { validateSession } from '../../hooks/auth.hook.js';
+import { validateByToken } from '../../hooks/auth.hook.js';
 
 /** @type {import('../../index').Route} */
 export default async server => {
@@ -9,7 +9,7 @@ export default async server => {
 
   server.delete(
     '/',
-    { preHandler: validateSession('access') },
+    { preHandler: validateByToken('access') },
     async (request, reply) => {
       const user = Reflect.get(request, 'user');
 

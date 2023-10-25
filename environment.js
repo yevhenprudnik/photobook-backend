@@ -3,6 +3,7 @@ env.config({ path: './.env' });
 
 export const HOST = process.env.HOST || '0.0.0.0';
 export const PORT = process.env.PORT || 8080;
+export const BASE_URL = process.env.BASE_URL;
 // database connection
 export const DB_HOST = process.env.DB_HOST;
 export const DB_PORT = process.env.DB_PORT;

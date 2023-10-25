@@ -109,7 +109,10 @@ describe('/auth test.', async () => {
     const data = await res.json();
 
     assert.strictEqual(data.statusCode, 400);
-    assert.strictEqual(data.message, 'No auth headers provided.');
+    assert.strictEqual(
+      data.message,
+      "headers must have required property 'authorization'"
+    );
   });
 
   test('Throw error with invalid auth headers.', async t => {
