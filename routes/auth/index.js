@@ -1,6 +1,6 @@
 import { getCurrentUser, signUp, signIn, refreshSession } from './schemas.js';
 import { validateByToken } from '../../hooks/auth.hook.js';
-import userRepository from '../../db/repositories/user.repository.js';
+import userRepository from '../../db/repositories/user/user.repository.js';
 import tokenService from '../../services/token.service.js';
 import { hash, compare } from '../../services/crypto.service.js';
 import apiError from '../../apiError.js';

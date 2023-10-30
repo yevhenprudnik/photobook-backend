@@ -1,4 +1,4 @@
-import userRepository from '../../db/repositories/user.repository.js';
+import userRepository from '../../db/repositories/user/user.repository.js';
 import { validateByToken } from '../../hooks/auth.hook.js';
 import { getUser } from '../../services/user.cache.service.js';
 

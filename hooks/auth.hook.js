@@ -1,4 +1,4 @@
-import userRepository from '../db/repositories/user.repository.js';
+import userRepository from '../db/repositories/user/user.repository.js';
 import apiError, { ApiError } from '../apiError.js';
 import tokenService from '../services/token.service.js';
 import { setUser } from '../services/user.cache.service.js';

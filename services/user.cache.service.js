@@ -1,4 +1,4 @@
-/** @typedef {import('../db/repositories/types').User} User */
+/** @typedef {import('../db/repositories/user/types').User} User */
 
 /**
  * @param {any} target
