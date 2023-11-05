@@ -28,6 +28,7 @@
     "pg": "^8.11.3"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.4.10",
     "@types/knex": "^0.16.1",
     "@types/node": "^20.6.1",
     "@types/pg": "^8.10.7",
