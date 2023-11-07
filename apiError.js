@@ -3,8 +3,8 @@
  */
 export class ApiError extends Error {
   /**
-   * @param {number} code - The status code for the error.
-   * @param {string} message - The error message.
+   * @param {number} code
+   * @param {string} message
    */
   constructor(code, message) {
     super(message);

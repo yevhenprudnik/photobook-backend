@@ -15,6 +15,6 @@ export default async server => {
       const user = getUser(request);
 
       return userRepository.remove({ id: user.id });
-    }
+    },
   );
 };

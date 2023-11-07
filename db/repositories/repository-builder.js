@@ -1,7 +1,7 @@
 import db from '../db.js';
 
-/** @type {import('./types').repository} */
-export function repository(table) {
+/** @type {import('./types.js').repository} */
+export function repositoryBuilder(table) {
   return {
     find: async (filter = {}) => {
       return db(table).where(filter);

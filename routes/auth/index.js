@@ -13,7 +13,7 @@ export default async server => {
     { schema: getCurrentUser, preHandler: validateByToken('access') },
     async (request, reply) => {
       return getUser(request);
-    }
+    },
   );
 
   server.post('/sign-up', { schema: signUp }, async (request, reply) => {
@@ -67,6 +67,6 @@ export default async server => {
         accessToken: tokenService.generateAccess({ id: user.id }),
         refreshToken: tokenService.generateRefresh({ id: user.id }),
       };
-    }
+    },
   );
 };

@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { request } from './helpers/request.helper.js';
 
 describe('/auth test.', async () => {
-  let user = {
+  const user = {
     username: 'test_username',
     email: 'test_email@gmail.com',
     password: 'test_password',

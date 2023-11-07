@@ -4,11 +4,11 @@ import crypto from 'node:crypto';
 export const hash = password => {
   const salt = crypto.randomBytes(16).toString('hex');
 
-  const hash = crypto
+  const hashed = crypto
     .pbkdf2Sync(password, salt, 1000, 64, `sha512`)
     .toString(`hex`);
 
-  return salt + ':' + hash;
+  return `${salt}:${hashed}`;
 };
 
 /**
@@ -16,10 +16,10 @@ export const hash = password => {
  * @param {string} passwordHash
  */
 export const compare = (password, passwordHash) => {
-  const [salt, hash] = passwordHash.split(':');
+  const [salt, hashed] = passwordHash.split(':');
 
   return (
-    hash ===
+    hashed ===
     crypto.pbkdf2Sync(password, salt, 1000, 64, `sha512`).toString(`hex`)
   );
 };

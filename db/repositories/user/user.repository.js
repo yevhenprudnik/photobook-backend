@@ -1,4 +1,4 @@
-import { repository } from '../repository.js';
+import { repositoryBuilder } from '../repository-builder.js';
 
 /** @type {import('./types').UserRepository} */
-export default repository('user');
+export default repositoryBuilder('user');

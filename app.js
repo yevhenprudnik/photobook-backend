@@ -7,9 +7,9 @@ const __dirname = join(dirname(__filename));
 
 /**
  * @param {import('fastify').FastifyInstance} server
- * @param {import('fastify').FastifyServerOptions} _options
+ * @param {import('fastify').FastifyServerOptions} options
  */
-export default async (server, _options) => {
+export default async (server, options) => {
   server.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
   });

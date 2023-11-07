@@ -1,4 +1,5 @@
 import * as env from 'dotenv';
+
 env.config({ path: '../.env' });
 
 export default {
