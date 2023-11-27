@@ -10,7 +10,8 @@
     "test": "node --test **/*.test.js",
     "migrate:up": "npx knex migrate:latest --knexfile db/knexfile.js",
     "migrate:down": "npx knex migrate:rollback --knexfile db/knexfile.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "deploy": "fly deploy"
   },
   "keywords": [],
   "author": "",
