@@ -10,8 +10,19 @@ const db = knex({
     password: DB_PASS,
     database: DB_NAME,
   },
+  pool: {
+    max: 5,
+    min: 1,
+  },
 });
 
-console.log('Database connected.');
+// Db health check
+db.raw('SELECT 1')
+  .then(() => {
+    console.log('Database connected!');
+  })
+  .catch(error => {
+    console.error('Error connecting to the database: ', error);
+  });
 
 export default db;

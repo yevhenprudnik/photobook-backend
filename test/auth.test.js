@@ -28,7 +28,7 @@ describe('/auth test.', async () => {
     assert.deepStrictEqual(data, { affected: 1 });
 
     console.log(
-      `Cleaned up testing environment: removed ${data.affected} test user.`
+      `Cleaned up testing environment: removed ${data.affected} test user.`,
     );
   });
 
@@ -43,7 +43,7 @@ describe('/auth test.', async () => {
 
     assert.strictEqual(
       data.message,
-      "body must have required property 'email'"
+      "body must have required property 'email'",
     );
   });
 
@@ -111,7 +111,7 @@ describe('/auth test.', async () => {
     assert.strictEqual(data.statusCode, 400);
     assert.strictEqual(
       data.message,
-      "headers must have required property 'authorization'"
+      "headers must have required property 'authorization'",
     );
   });
 
