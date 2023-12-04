@@ -21,7 +21,7 @@ export const signIn = /** @type {const} */ ({
   },
 });
 
-const authHeadersSchema = {
+export const authHeadersSchema = {
   type: 'object',
   properties: {
     authorization: {

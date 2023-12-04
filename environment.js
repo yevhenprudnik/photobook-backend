@@ -15,3 +15,5 @@ export const DB_PASS = process.env.DB_PASS || 'postgres';
 // jsonwebtoken
 export const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || 'secret';
 export const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'secret';
+// test
+export const TEST_ACCESS_TOKEN = process.env.TEST_ACCESS_TOKEN || 'token';

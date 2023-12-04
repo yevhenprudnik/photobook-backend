@@ -14,6 +14,7 @@ const db = knex({
     max: 5,
     min: 1,
   },
+  useNullAsDefault: true,
 });
 
 // Db health check
