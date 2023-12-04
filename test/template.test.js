@@ -22,11 +22,7 @@ describe('/templates test.', async () => {
   let createdTemplateId;
 
   test('Retrieve all templates.', async () => {
-    const res = await request('/template', 'GET', {
-      headers: {
-        authorization: `Bearer ${TEST_ACCESS_TOKEN}`,
-      },
-    });
+    const res = await request('/template', 'GET', {});
 
     assert.strictEqual(res.status, 200);
 
@@ -87,11 +83,7 @@ describe('/templates test.', async () => {
   });
 
   test('Find created template successfully.', async () => {
-    const res = await request(`/template/${createdTemplateId}`, 'GET', {
-      headers: {
-        authorization: `Bearer ${TEST_ACCESS_TOKEN}`,
-      },
-    });
+    const res = await request(`/template/${createdTemplateId}`, 'GET');
 
     assert.strictEqual(res.status, 200);
 

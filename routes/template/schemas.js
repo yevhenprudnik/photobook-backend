@@ -8,7 +8,6 @@ export const getTemplate = /** @type {const} */ ({
     },
     required: ['id'],
   },
-  headers: authHeadersSchema,
 });
 
 export const createTemplate = /** @type {const} */ ({
