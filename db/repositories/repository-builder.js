@@ -12,9 +12,18 @@ export function repositoryBuilder(table) {
     },
 
     create: async definition => {
-      const users = await db(table).insert(definition).returning('id');
+      const entities = await db(table).insert(definition).returning('id');
 
-      return users[0].id;
+      return entities[0].id;
+    },
+
+    update: async (id, definition) => {
+      const res = await db(table)
+        .where({ id })
+        .update(definition)
+        .returning('*');
+
+      return res[0];
     },
 
     remove: async filter => {
