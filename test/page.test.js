@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { request } from './helpers/request.helper.js';
 import { TEST_ACCESS_TOKEN } from '../environment.js';
 
-describe('/photobook test.', async () => {
+describe('/page test.', async () => {
   const template = {
     name: 'Test Template',
     html: '<!DOCTYPE html><html><body><h1>Hello, World!</h1></body></html>',
