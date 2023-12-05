@@ -7,7 +7,7 @@ describe('/page test.', async () => {
   const template = {
     name: 'Test Template',
     html: '<!DOCTYPE html><html><body><h1>Hello, World!</h1></body></html>',
-    requiredFields: ['field1', 'field2'],
+    requiredReplacements: ['field1', 'field2'],
   };
 
   const photobook = {

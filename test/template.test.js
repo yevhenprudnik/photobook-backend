@@ -7,13 +7,13 @@ describe('/templates test.', async () => {
   const validTemplate = {
     name: 'Test Template',
     html: '<!DOCTYPE html><html><body><h1>Hello, World!</h1></body></html>',
-    requiredFields: ['field1', 'field2'],
+    requiredReplacements: ['field1', 'field2'],
   };
 
   const invalidTemplate = {
     name: 'Short',
     html: 'Invalid HTML Content',
-    requiredFields: ['field1'],
+    requiredReplacements: ['field1'],
   };
 
   /**
@@ -92,7 +92,7 @@ describe('/templates test.', async () => {
     assert.strictEqual(typeof data.id, 'number');
     assert.strictEqual(data.name, validTemplate.name);
     assert.strictEqual(data.html, validTemplate.html);
-    assert.deepStrictEqual(data.requiredFields, validTemplate.requiredFields);
+    assert.deepStrictEqual(data.requiredReplacements, validTemplate.requiredReplacements);
   });
 
   test('Fail to update a template with invalid ID.', async () => {
@@ -110,7 +110,7 @@ describe('/templates test.', async () => {
     const updatedTemplate = {
       name: 'Updated Template Name',
       html: '<!DOCTYPE html><html><body><h1>Updated!</h1></body></html>',
-      requiredFields: ['updatedField1', 'updatedField2'],
+      requiredReplacements: ['updatedField1', 'updatedField2'],
     };
 
     const res = await request(`/template/${createdTemplateId}`, 'POST', {
@@ -127,7 +127,7 @@ describe('/templates test.', async () => {
     assert.strictEqual(data.id, createdTemplateId);
     assert.strictEqual(data.name, updatedTemplate.name);
     assert.strictEqual(data.html, updatedTemplate.html);
-    assert.deepStrictEqual(data.requiredFields, updatedTemplate.requiredFields);
+    assert.deepStrictEqual(data.requiredReplacements, updatedTemplate.requiredReplacements);
   });
 
   test('Fail to delete a template with invalid ID.', async () => {

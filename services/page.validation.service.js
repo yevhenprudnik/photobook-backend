@@ -31,7 +31,7 @@ export const validatePage = async (user, newPage, currentPage) => {
     throw apiError.notFound('No template with such id.');
   }
 
-  template.requiredFields.forEach(field => {
+  template.requiredReplacements.forEach(field => {
     if (!replacements?.[field]) {
       throw apiError.badRequest(`Missing '${field}' required field.`);
     }

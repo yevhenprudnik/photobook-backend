@@ -4,7 +4,7 @@ export const up = knex => {
     table.increments();
     table.string('name', 50).notNullable();
     table.text('html').notNullable();
-    table.specificType('requiredFields', 'TEXT[]').defaultTo('{}');
+    table.specificType('requiredReplacements', 'TEXT[]').defaultTo('{}');
     table.timestamps(true, true);
   });
 };

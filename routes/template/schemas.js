@@ -19,7 +19,7 @@ export const createTemplate = /** @type {const} */ ({
         type: 'string',
         pattern: '<!DOCTYPE.*>|<[^>]+>',
       },
-      requiredFields: {
+      requiredReplacements: {
         type: 'array',
         items: {
           type: 'string',
@@ -44,7 +44,7 @@ export const updateTemplate = /** @type {const} */ ({
     properties: {
       name: { type: 'string', minLength: 5, maxLength: 50 },
       html: { type: 'string', pattern: '<!DOCTYPE.*>|<[^>]+>' },
-      requiredFields: {
+      requiredReplacements: {
         type: 'array',
         items: {
           type: 'string',
