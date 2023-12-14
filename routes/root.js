@@ -5,6 +5,6 @@ export default async server => {
   });
 
   server.get('/fly', async (request, reply) => {
-    return { fly: true };
+    return { flyIo: true };
   });
 };
