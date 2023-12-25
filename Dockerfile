@@ -22,7 +22,7 @@ RUN apt-get update -qq && \
 
 # Install node modules
 COPY --link package-lock.json package.json ./
-RUN npm ci
+RUN npm install --omit=dev --force
 
 # Copy application code
 COPY --link . .
