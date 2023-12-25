@@ -24,7 +24,7 @@ RUN npm cache clean --force
 
 # Install node modules
 COPY --link package-lock.json package.json ./
-RUN npm ci
+RUN npm install --omit-dev --legacy-peer-deps
 
 # Copy application code
 COPY --link . .
