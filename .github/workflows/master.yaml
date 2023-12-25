@@ -21,8 +21,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install NPM dependencies
         run: |
-          npm cache clean --force
-          npm install --omit=dev --force
+          npm install --omit=dev
       - name: Deploy
         run: flyctl deploy
         env:
