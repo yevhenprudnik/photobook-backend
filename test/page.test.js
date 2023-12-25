@@ -114,7 +114,7 @@ describe('/page test.', async () => {
 
     const data = await res.json();
 
-    assert.strictEqual(data.message, `Missing 'field1' required field.`);
+    assert.strictEqual(data.message, "Missing 'field1' required field.");
   });
 
   test('Create a new page successfully.', async () => {

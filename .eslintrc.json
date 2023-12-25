@@ -8,11 +8,22 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "import/extensions": "off",
     "no-underscore-dangle": "off",
     "no-unused-vars": ["error", { "args": "none" }],
     "import/prefer-default-export": "off",
-    "arrow-body-style": "off"
-  }
+    "arrow-body-style": "off",
+    "quotes": ["error", "single", { "avoidEscape": true }]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.d.ts"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "no-unused-vars": "off"
+      }
+    }
+  ]
 }

@@ -1,12 +1,12 @@
 import crypto from 'node:crypto';
 
 /** @param {string} password */
-export const hash = password => {
+export const hash = (password) => {
   const salt = crypto.randomBytes(16).toString('hex');
 
   const hashed = crypto
-    .pbkdf2Sync(password, salt, 1000, 64, `sha512`)
-    .toString(`hex`);
+    .pbkdf2Sync(password, salt, 1000, 64, 'sha512')
+    .toString('hex');
 
   return `${salt}:${hashed}`;
 };
@@ -20,6 +20,6 @@ export const compare = (password, passwordHash) => {
 
   return (
     hashed ===
-    crypto.pbkdf2Sync(password, salt, 1000, 64, `sha512`).toString(`hex`)
+    crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex')
   );
 };

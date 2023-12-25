@@ -1,4 +1,5 @@
 import fastify from 'fastify';
+import { log, error } from 'console';
 import app from './app.js';
 import db from './db/db.js';
 import { HOST, PORT } from './environment.js';
@@ -18,15 +19,15 @@ server.setErrorHandler((err, request, reply) => {
 
 server.listen({ port: +PORT, host: HOST }, err => {
   if (err) {
-    console.error(err);
+    error(err);
     process.exit(1);
   }
 
-  console.log(`Server is listening on port ${PORT}`);
+  log(`Server is listening on port ${PORT}`);
 });
 
 process.on('SIGINT', () => {
-  console.log('Stopping the server.');
+  log('Stopping the server.');
 
   Promise.all([server.close(), db.destroy()]).then(() => process.exit(0));
 });

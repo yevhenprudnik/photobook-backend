@@ -1,7 +1,6 @@
 import apiError from '../../apiError.js';
 import photobookRepository from '../../db/repositories/photobook/photobook.repository.js';
 import { validateByToken } from '../../hooks/auth.hook.js';
-import { getUser } from '../../services/user.cache.service.js';
 import {
   getPhotobook,
   createPhotobook,
@@ -10,24 +9,21 @@ import {
 } from './schemas.js';
 
 /** @type {import('../../index').Route} */
-export default async server => {
-  server.get('/', async (request, reply) => {
-    return photobookRepository.find();
-  });
+export default async (server) => {
+  server.get('/', async (request, reply) => photobookRepository.find());
 
-  server.get('/:id', { schema: getPhotobook }, async (request, reply) => {
-    return photobookRepository.findOne({ id: request.params.id });
-  });
+  server.get('/:id', { schema: getPhotobook }, async (request, reply) =>
+    photobookRepository.findOne({ id: request.params.id }),
+  );
 
   server.post(
     '/',
     { schema: createPhotobook, preHandler: validateByToken('access') },
-    async (request, reply) => {
-      return photobookRepository.create({
+    async (request, reply) =>
+      photobookRepository.create({
         ...request.body,
-        userId: getUser(request).id,
-      });
-    },
+        userId: request.user.id,
+      }),
   );
 
   server.post(
@@ -42,7 +38,7 @@ export default async server => {
         throw apiError.notFound('Photobook not found.');
       }
 
-      if (photobook.userId !== getUser(request).id) {
+      if (photobook.userId !== request.user.id) {
         throw apiError.forbidden('You have no access to this photobook.');
       }
 
@@ -62,7 +58,7 @@ export default async server => {
         throw apiError.notFound('Photobook not found.');
       }
 
-      if (photobook.userId !== getUser(request).id) {
+      if (photobook.userId !== request.user.id) {
         throw apiError.forbidden('You have no access to this photobook.');
       }
 

@@ -1,4 +1,4 @@
-import { Repository } from '../types';
+import { Repository } from '../types.d.ts';
 
 export type User = {
   id: number;

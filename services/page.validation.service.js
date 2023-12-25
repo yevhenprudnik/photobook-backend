@@ -3,7 +3,7 @@ import apiError from '../apiError.js';
 import photobookRepository from '../db/repositories/photobook/photobook.repository.js';
 
 /**
- * @param {import('./user.cache.service.js').User} user
+ * @param {import('../db/repositories/user/types').User} user
  * @param {Partial<import("../db/repositories/page/types").Page>} newPage
  * @param {import("../db/repositories/page/types").Page=} currentPage
  * @returns {Promise<void | Error>}

@@ -4,7 +4,6 @@ import userRepository from '../../db/repositories/user/user.repository.js';
 import tokenService from '../../services/token.service.js';
 import { hash, compare } from '../../services/crypto.service.js';
 import apiError from '../../apiError.js';
-import { getUser } from '../../services/user.cache.service.js';
 
 /** @type {import('../../index').Route} */
 export default async server => {
@@ -12,7 +11,7 @@ export default async server => {
     '/',
     { schema: getCurrentUser, preHandler: validateByToken('access') },
     async (request, reply) => {
-      return getUser(request);
+      return request.user;
     },
   );
 
@@ -61,11 +60,11 @@ export default async server => {
     '/session',
     { schema: refreshSession, preHandler: validateByToken('refresh') },
     async (request, reply) => {
-      const user = getUser(request);
+      const { id } = request.user;
 
       return {
-        accessToken: tokenService.generateAccess({ id: user.id }),
-        refreshToken: tokenService.generateRefresh({ id: user.id }),
+        accessToken: tokenService.generateAccess({ id }),
+        refreshToken: tokenService.generateRefresh({ id }),
       };
     },
   );

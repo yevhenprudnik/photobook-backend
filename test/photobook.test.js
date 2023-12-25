@@ -51,7 +51,7 @@ describe('/photobook test.', async () => {
 
     const data = await res.json();
 
-    assert.strictEqual(data.message, `body must have required property 'name'`);
+    assert.strictEqual(data.message, "body must have required property 'name'");
   });
 
   test('Create a new photobook successfully.', async () => {

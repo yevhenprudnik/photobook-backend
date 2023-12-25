@@ -1,4 +1,5 @@
 import knex from 'knex';
+import { log, error } from 'console';
 import { DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER } from '../environment.js';
 
 const db = knex({
@@ -20,10 +21,10 @@ const db = knex({
 // Db health check
 db.raw('SELECT 1')
   .then(() => {
-    console.log('Database connected!');
+    log('Database connected!');
   })
-  .catch(error => {
-    console.error('Error connecting to the database: ', error);
+  .catch(e => {
+    error('Error connecting to the database: ', e);
   });
 
 export default db;

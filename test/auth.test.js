@@ -1,5 +1,6 @@
 import test, { after, describe } from 'node:test';
 import assert from 'node:assert';
+import { log } from 'node:console';
 import { request } from './helpers/request.helper.js';
 
 describe('/auth test.', async () => {
@@ -27,9 +28,7 @@ describe('/auth test.', async () => {
 
     assert.deepStrictEqual(data, { affected: 1 });
 
-    console.log(
-      `Cleaned up testing environment: removed ${data.affected} test user.`,
-    );
+    log(`Cleaned up testing environment: removed ${data.affected} test user.`);
   });
 
   test('Throw error if required fields are missing.', async t => {
@@ -43,7 +42,7 @@ describe('/auth test.', async () => {
 
     assert.strictEqual(
       data.message,
-      "body must have required property 'email'",
+      'body must have required property \'email\'',
     );
   });
 
@@ -111,7 +110,7 @@ describe('/auth test.', async () => {
     assert.strictEqual(data.statusCode, 400);
     assert.strictEqual(
       data.message,
-      "headers must have required property 'authorization'",
+      'headers must have required property \'authorization\'',
     );
   });
 

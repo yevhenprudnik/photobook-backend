@@ -1,5 +1,4 @@
-import { Page } from '../page/types';
-import { Repository } from '../types';
+import { Repository } from '../types.d.ts';
 
 export type Photobook = {
   id: number;

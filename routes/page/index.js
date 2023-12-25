@@ -2,7 +2,6 @@ import apiError from '../../apiError.js';
 import pageRepository from '../../db/repositories/page/page.repository.js';
 import { validateByToken } from '../../hooks/auth.hook.js';
 import { validatePage } from '../../services/page.validation.service.js';
-import { getUser } from '../../services/user.cache.service.js';
 import { createPage, updatePage, delatePage, getPage } from './schemas.js';
 
 /** @type {import('../../index').Route} */
@@ -19,7 +18,7 @@ export default async server => {
     '/',
     { schema: createPage, preHandler: validateByToken('access') },
     async (request, reply) => {
-      await validatePage(getUser(request), request.body);
+      await validatePage(request.user, request.body);
 
       return pageRepository.create(request.body);
     },
@@ -37,7 +36,7 @@ export default async server => {
         throw apiError.notFound('Page not found.');
       }
 
-      await validatePage(getUser(request), request.body, page);
+      await validatePage(request.user, request.body, page);
 
       return pageRepository.update(request.params.id, request.body);
     },
