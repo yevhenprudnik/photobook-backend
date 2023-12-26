@@ -72,7 +72,11 @@ describe('/page test.', async () => {
   });
 
   test('Retrieve all pages.', async () => {
-    const res = await request('/page', 'GET');
+    const res = await request('/page', 'GET', {
+      headers: {
+        authorization: `Bearer ${TEST_ACCESS_TOKEN}`,
+      },
+    });
 
     assert.strictEqual(res.status, 200);
 

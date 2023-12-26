@@ -6,7 +6,7 @@ import { hash, compare } from '../../services/crypto.service.js';
 import apiError from '../../apiError.js';
 
 /** @type {import('../../index').Route} */
-export default async server => {
+export default async (server) => {
   server.get(
     '/',
     { schema: getCurrentUser, preHandler: validateByToken('access') },

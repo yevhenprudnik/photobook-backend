@@ -1,6 +1,7 @@
 import { authHeadersSchema } from '../auth/schemas.js';
 
 export const getTemplate = /** @type {const} */ ({
+  tags: ['template'],
   params: {
     type: 'object',
     properties: {
@@ -10,7 +11,13 @@ export const getTemplate = /** @type {const} */ ({
   },
 });
 
+export const getTemplates = /** @type {const} */ ({
+  tags: ['photobook'],
+  headers: authHeadersSchema,
+});
+
 export const createTemplate = /** @type {const} */ ({
+  tags: ['template'],
   body: {
     type: 'object',
     properties: {
@@ -32,6 +39,7 @@ export const createTemplate = /** @type {const} */ ({
 });
 
 export const updateTemplate = /** @type {const} */ ({
+  tags: ['template'],
   params: {
     type: 'object',
     properties: {
@@ -56,6 +64,7 @@ export const updateTemplate = /** @type {const} */ ({
 });
 
 export const delateTemplate = /** @type {const} */ ({
+  tags: ['template'],
   params: {
     type: 'object',
     properties: {

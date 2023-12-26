@@ -1,4 +1,4 @@
-import { BASE_URL } from '../../environment.js';
+import { PROTOCOL, HOST, PORT } from '../../environment.js';
 
 /**
  * @param {string} path
@@ -8,7 +8,7 @@ import { BASE_URL } from '../../environment.js';
 export const request = async (path, method, args = {}) => {
   const { headers, body } = args;
 
-  return fetch(BASE_URL + path, {
+  return fetch(`${PROTOCOL}://${HOST}:${PORT}${path}`, {
     method,
     headers: {
       'content-type': 'application/json',

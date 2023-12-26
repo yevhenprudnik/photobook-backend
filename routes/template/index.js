@@ -6,11 +6,12 @@ import {
   updateTemplate,
   delateTemplate,
   getTemplate,
+  getTemplates,
 } from './schemas.js';
 
 /** @type {import('../../index').Route} */
-export default async server => {
-  server.get('/', async (request, reply) => {
+export default async (server) => {
+  server.get('/', { schema: getTemplates }, async (request, reply) => {
     return templateRepository.find();
   });
 

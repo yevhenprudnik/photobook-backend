@@ -14,7 +14,11 @@ describe('/photobook test.', async () => {
   let createdPhotobookId;
 
   test('Retrieve all photobooks.', async () => {
-    const res = await request('/photobook', 'GET');
+    const res = await request('/photobook', 'GET', {
+      headers: {
+        authorization: `Bearer ${TEST_ACCESS_TOKEN}`,
+      },
+    });
 
     assert.strictEqual(res.status, 200);
 

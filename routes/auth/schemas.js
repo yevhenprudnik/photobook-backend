@@ -1,4 +1,5 @@
 export const signUp = /** @type {const} */ ({
+  tags: ['auth'],
   body: {
     type: 'object',
     properties: {
@@ -11,6 +12,7 @@ export const signUp = /** @type {const} */ ({
 });
 
 export const signIn = /** @type {const} */ ({
+  tags: ['auth'],
   body: {
     type: 'object',
     properties: {
@@ -32,9 +34,11 @@ export const authHeadersSchema = {
 };
 
 export const getCurrentUser = /** @type {const} */ ({
+  tags: ['auth'],
   headers: authHeadersSchema,
 });
 
 export const refreshSession = /** @type {const} */ ({
+  tags: ['auth'],
   headers: authHeadersSchema,
 });

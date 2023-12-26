@@ -6,11 +6,14 @@ import {
   createPhotobook,
   updatePhotobook,
   delatePhotobook,
+  getPhotobooks,
 } from './schemas.js';
 
 /** @type {import('../../index').Route} */
 export default async (server) => {
-  server.get('/', async (request, reply) => photobookRepository.find());
+  server.get('/', { schema: getPhotobooks }, async (request, reply) =>
+    photobookRepository.find(),
+  );
 
   server.get('/:id', { schema: getPhotobook }, async (request, reply) =>
     photobookRepository.findOne({ id: request.params.id }),

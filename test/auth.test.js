@@ -31,7 +31,7 @@ describe('/auth test.', async () => {
     log(`Cleaned up testing environment: removed ${data.affected} test user.`);
   });
 
-  test('Throw error if required fields are missing.', async t => {
+  test('Throw error if required fields are missing.', async (t) => {
     const res = await request('/auth/sign-up', 'POST', {
       body: { username: 'username', password: 'password' },
     });
@@ -42,11 +42,11 @@ describe('/auth test.', async () => {
 
     assert.strictEqual(
       data.message,
-      'body must have required property \'email\'',
+      "body must have required property 'email'",
     );
   });
 
-  test('Throw error if email is wrong format.', async t => {
+  test('Throw error if email is wrong format.', async (t) => {
     const res = await request('/auth/sign-up', 'POST', {
       body: {
         username: 'username',
@@ -62,7 +62,7 @@ describe('/auth test.', async () => {
     assert.strictEqual(data.message, 'body/email must match format "email"');
   });
 
-  test('Successfully sign up new user.', async t => {
+  test('Successfully sign up new user.', async (t) => {
     const res = await request('/auth/sign-up', 'POST', { body: user });
 
     assert.strictEqual(res.status, 200);
@@ -76,7 +76,7 @@ describe('/auth test.', async () => {
     assert.strictEqual(typeof data.refreshToken, 'string');
   });
 
-  test('Successfully sign in new user.', async t => {
+  test('Successfully sign in new user.', async (t) => {
     const res = await request('/auth/sign-in', 'POST', { body: user });
 
     assert.strictEqual(res.status, 200);
@@ -87,7 +87,7 @@ describe('/auth test.', async () => {
     assert.strictEqual(typeof data.refreshToken, 'string');
   });
 
-  test('Throw error with wrong password.', async t => {
+  test('Throw error with wrong password.', async (t) => {
     const res = await request('/auth/sign-in', 'POST', {
       body: { ...user, password: 'wrong_password' },
     });
@@ -100,7 +100,7 @@ describe('/auth test.', async () => {
     assert.strictEqual(data.message, 'Wrong credentials.');
   });
 
-  test('Throw error with missing auth headers.', async t => {
+  test('Throw error with missing auth headers.', async (t) => {
     const res = await request('/auth', 'GET');
 
     assert.strictEqual(res.status, 400);
@@ -110,11 +110,11 @@ describe('/auth test.', async () => {
     assert.strictEqual(data.statusCode, 400);
     assert.strictEqual(
       data.message,
-      'headers must have required property \'authorization\'',
+      "headers must have required property 'authorization'",
     );
   });
 
-  test('Throw error with invalid auth headers.', async t => {
+  test('Throw error with invalid auth headers.', async (t) => {
     const res = await request('/auth', 'GET', {
       headers: { authorization: 'Invalid auth headers.' },
     });
@@ -127,7 +127,7 @@ describe('/auth test.', async () => {
     assert.strictEqual(data.message, 'Invalid auth headers.');
   });
 
-  test('Successfully return user with valid tokens.', async t => {
+  test('Successfully return user with valid tokens.', async (t) => {
     const res = await request('/auth', 'GET', {
       headers: { authorization: `Bearer ${accessToken} ${refreshToken}` },
     });
@@ -141,7 +141,7 @@ describe('/auth test.', async () => {
     assert.strictEqual(data.username, user.username);
   });
 
-  test('Successfully refresh user session.', async t => {
+  test('Successfully refresh user session.', async (t) => {
     const res = await request('/auth/session', 'GET', {
       headers: { authorization: `Bearer ${accessToken} ${refreshToken}` },
     });

@@ -4,7 +4,7 @@ export default async server => {
     return { root: true };
   });
 
-  server.get('/fly', async (request, reply) => {
-    return { flyIo: true };
+  server.get('/healthcheck', async (request, reply) => {
+    return { ok: true };
   });
 };

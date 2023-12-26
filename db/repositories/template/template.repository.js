@@ -1,4 +1,4 @@
 import { repositoryBuilder } from '../repository-builder.js';
 
-/** @type {import('./types.js').TemplateRepository} */
+/** @type {import('./types.d.ts').TemplateRepository} */
 export default repositoryBuilder('template');

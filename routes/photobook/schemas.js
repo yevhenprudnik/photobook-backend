@@ -1,6 +1,7 @@
 import { authHeadersSchema } from '../auth/schemas.js';
 
 export const getPhotobook = /** @type {const} */ ({
+  tags: ['photobook'],
   params: {
     type: 'object',
     properties: {
@@ -10,7 +11,13 @@ export const getPhotobook = /** @type {const} */ ({
   },
 });
 
+export const getPhotobooks = /** @type {const} */ ({
+  tags: ['photobook'],
+  headers: authHeadersSchema,
+});
+
 export const createPhotobook = /** @type {const} */ ({
+  tags: ['photobook'],
   body: {
     type: 'object',
     properties: {
@@ -26,6 +33,7 @@ export const createPhotobook = /** @type {const} */ ({
 });
 
 export const updatePhotobook = /** @type {const} */ ({
+  tags: ['photobook'],
   params: {
     type: 'object',
     properties: {
@@ -47,6 +55,7 @@ export const updatePhotobook = /** @type {const} */ ({
 });
 
 export const delatePhotobook = /** @type {const} */ ({
+  tags: ['photobook'],
   params: {
     type: 'object',
     properties: {

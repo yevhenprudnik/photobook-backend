@@ -1,17 +1,17 @@
 import db from '../db.js';
 
-/** @type {import('./types.js').repository} */
+/** @type {import('./types.d.ts').repository} */
 export function repositoryBuilder(table) {
   return {
     find: async (filter = {}) => {
       return db(table).where(filter);
     },
 
-    findOne: async filter => {
+    findOne: async (filter) => {
       return db(table).where(filter).first();
     },
 
-    create: async definition => {
+    create: async (definition) => {
       const entities = await db(table).insert(definition).returning('id');
 
       return entities[0].id;
@@ -26,7 +26,7 @@ export function repositoryBuilder(table) {
       return res[0];
     },
 
-    remove: async filter => {
+    remove: async (filter) => {
       const affected = await db(table).where(filter).del();
 
       return { affected };

@@ -1,6 +1,7 @@
 import { authHeadersSchema } from '../auth/schemas.js';
 
 export const getPage = /** @type {const} */ ({
+  tags: ['page'],
   params: {
     type: 'object',
     properties: {
@@ -11,6 +12,7 @@ export const getPage = /** @type {const} */ ({
 });
 
 export const createPage = /** @type {const} */ ({
+  tags: ['page'],
   body: {
     type: 'object',
     properties: {
@@ -32,6 +34,7 @@ export const createPage = /** @type {const} */ ({
 });
 
 export const updatePage = /** @type {const} */ ({
+  tags: ['page'],
   params: {
     type: 'object',
     properties: {
@@ -59,6 +62,7 @@ export const updatePage = /** @type {const} */ ({
 });
 
 export const delatePage = /** @type {const} */ ({
+  tags: ['page'],
   params: {
     type: 'object',
     properties: {
@@ -66,5 +70,10 @@ export const delatePage = /** @type {const} */ ({
     },
     required: ['id'],
   },
+  headers: authHeadersSchema,
+});
+
+export const getPages = /** @type {const} */ ({
+  tags: ['page'],
   headers: authHeadersSchema,
 });

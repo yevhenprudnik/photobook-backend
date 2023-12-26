@@ -2,11 +2,17 @@ import apiError from '../../apiError.js';
 import pageRepository from '../../db/repositories/page/page.repository.js';
 import { validateByToken } from '../../hooks/auth.hook.js';
 import { validatePage } from '../../services/page.validation.service.js';
-import { createPage, updatePage, delatePage, getPage } from './schemas.js';
+import {
+  createPage,
+  updatePage,
+  delatePage,
+  getPage,
+  getPages,
+} from './schemas.js';
 
 /** @type {import('../../index').Route} */
-export default async server => {
-  server.get('/', async (request, reply) => {
+export default async (server) => {
+  server.get('/', { schema: getPages }, async (request, reply) => {
     return pageRepository.find();
   });
 

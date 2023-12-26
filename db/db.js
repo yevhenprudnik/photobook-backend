@@ -12,7 +12,7 @@ const db = knex({
     database: DB_NAME,
   },
   pool: {
-    max: 5,
+    max: 2,
     min: 1,
   },
   useNullAsDefault: true,

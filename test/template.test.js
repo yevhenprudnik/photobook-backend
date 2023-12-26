@@ -22,7 +22,11 @@ describe('/templates test.', async () => {
   let createdTemplateId;
 
   test('Retrieve all templates.', async () => {
-    const res = await request('/template', 'GET', {});
+    const res = await request('/template', 'GET', {
+      headers: {
+        authorization: `Bearer ${TEST_ACCESS_TOKEN}`,
+      },
+    });
 
     assert.strictEqual(res.status, 200);
 
@@ -92,7 +96,10 @@ describe('/templates test.', async () => {
     assert.strictEqual(typeof data.id, 'number');
     assert.strictEqual(data.name, validTemplate.name);
     assert.strictEqual(data.html, validTemplate.html);
-    assert.deepStrictEqual(data.requiredReplacements, validTemplate.requiredReplacements);
+    assert.deepStrictEqual(
+      data.requiredReplacements,
+      validTemplate.requiredReplacements,
+    );
   });
 
   test('Fail to update a template with invalid ID.', async () => {
@@ -127,7 +134,10 @@ describe('/templates test.', async () => {
     assert.strictEqual(data.id, createdTemplateId);
     assert.strictEqual(data.name, updatedTemplate.name);
     assert.strictEqual(data.html, updatedTemplate.html);
-    assert.deepStrictEqual(data.requiredReplacements, updatedTemplate.requiredReplacements);
+    assert.deepStrictEqual(
+      data.requiredReplacements,
+      updatedTemplate.requiredReplacements,
+    );
   });
 
   test('Fail to delete a template with invalid ID.', async () => {
