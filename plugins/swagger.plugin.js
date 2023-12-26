@@ -1,7 +1,7 @@
 import fp from 'fastify-plugin';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
-import { HOST, PORT } from '../environment.js';
+import { API_URL, PROTOCOL } from '../environment.js';
 
 export default fp(async (fastify) => {
   await fastify.register(swagger, {
@@ -10,8 +10,8 @@ export default fp(async (fastify) => {
         title: 'Photobook API',
         version: '1',
       },
-      host: `${HOST}:${PORT}`,
-      schemes: ['http'],
+      host: API_URL,
+      schemes: [PROTOCOL],
       securityDefinitions: {
         ApiToken: {
           description:
