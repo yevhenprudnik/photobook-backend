@@ -3,7 +3,7 @@ import * as env from 'dotenv';
 env.config({ path: './.env' });
 
 export const HOST = process.env.HOST || 'localhost';
-export const PORT = process.env.PORT || 8080;
+export const PORT = process.env.PORT || 3000;
 export const PROTOCOL = process.env.PROTOCOL || 'http';
 // database connection
 export const DB_CONNECTION = process.env.DB_CONNECTION || '';
